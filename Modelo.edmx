@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CAEMPRUEBASModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CAEMPRUEBASModelStoreContainer">
+          <EntitySet Name="Colaboradores" EntityType="CAEMPRUEBASModel.Store.Colaboradores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Horarios" EntityType="CAEMPRUEBASModel.Store.Horarios" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Llaves" EntityType="CAEMPRUEBASModel.Store.Llaves" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Maquinas" EntityType="CAEMPRUEBASModel.Store.Maquinas" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Proceso" EntityType="CAEMPRUEBASModel.Store.Proceso" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tipo_Movimiento" EntityType="CAEMPRUEBASModel.Store.Tipo_Movimiento" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tipo_proceso" EntityType="CAEMPRUEBASModel.Store.Tipo_proceso" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Llaves_Usuarios1" Association="CAEMPRUEBASModel.Store.FK_Llaves_Usuarios1">
+            <End Role="Colaboradores" EntitySet="Colaboradores" />
+            <End Role="Llaves" EntitySet="Llaves" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Colaboradores">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nomina" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+          <Property Name="hora" Type="tinyint" Nullable="false" />
+          <Property Name="minuto" Type="tinyint" Nullable="false" />
+          <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Llaves">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Colaborador" Type="int" />
+          <Property Name="Faltas" Type="int" />
+          <Property Name="Limite_Faltas" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Fecha_Inicial" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Maquinas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="Departamento" Type="int" />
+          <Property Name="Dias_Vencimiento" Type="int" />
+          <Property Name="Tiempo_Minimo_Trabajo" Type="int" />
+          <Property Name="Tiempo_Inactividad" Type="int" />
+          <Property Name="Verificar_Maquina" Type="bit" />
+          <Property Name="Baja" Type="bit" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="mantenimientoHoras" Type="int" />
+          <Property Name="Dias_Vencimiento_Maquina" Type="int" />
+          <Property Name="Verificar_fechaPermiso_Maquina" Type="bit" />
+        </EntityType>
+        <EntityType Name="Proceso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Ranura" Type="bit" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tipo_Movimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="EsLlave" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tipo_proceso">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Name="id_tipo" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="grupo" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="descripcion" Type="varchar" Nullable="false" MaxLength="70" />
+        </EntityType>
+        <Association Name="FK_Llaves_Usuarios1">
+          <End Role="Colaboradores" Type="CAEMPRUEBASModel.Store.Colaboradores" Multiplicity="0..1" />
+          <End Role="Llaves" Type="CAEMPRUEBASModel.Store.Llaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colaboradores">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Llaves">
+              <PropertyRef Name="Colaborador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CAEMPRUEBASModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CAEMPRUEBASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Colaboradores" EntityType="CAEMPRUEBASModel.Colaboradores" />
+          <EntitySet Name="Horarios" EntityType="CAEMPRUEBASModel.Horarios" />
+          <EntitySet Name="Llaves" EntityType="CAEMPRUEBASModel.Llaves" />
+          <EntitySet Name="Maquinas" EntityType="CAEMPRUEBASModel.Maquinas" />
+          <EntitySet Name="Proceso" EntityType="CAEMPRUEBASModel.Proceso" />
+          <EntitySet Name="Tipo_Movimiento" EntityType="CAEMPRUEBASModel.Tipo_Movimiento" />
+          <EntitySet Name="Tipo_proceso" EntityType="CAEMPRUEBASModel.Tipo_proceso" />
+          <AssociationSet Name="FK_Llaves_Usuarios1" Association="CAEMPRUEBASModel.FK_Llaves_Usuarios1">
+            <End Role="Colaboradores" EntitySet="Colaboradores" />
+            <End Role="Llaves" EntitySet="Llaves" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Colaboradores">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nomina" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="Llaves" Relationship="CAEMPRUEBASModel.FK_Llaves_Usuarios1" FromRole="Colaboradores" ToRole="Llaves" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="hora" Type="Byte" Nullable="false" />
+          <Property Name="minuto" Type="Byte" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Llaves">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Colaborador" Type="Int32" />
+          <Property Name="Faltas" Type="Int32" />
+          <Property Name="Limite_Faltas" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Inicial" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Colaboradores" Relationship="CAEMPRUEBASModel.FK_Llaves_Usuarios1" FromRole="Llaves" ToRole="Colaboradores" />
+        </EntityType>
+        <EntityType Name="Maquinas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Departamento" Type="Int32" />
+          <Property Name="Dias_Vencimiento" Type="Int32" />
+          <Property Name="Tiempo_Minimo_Trabajo" Type="Int32" />
+          <Property Name="Tiempo_Inactividad" Type="Int32" />
+          <Property Name="Verificar_Maquina" Type="Boolean" />
+          <Property Name="Baja" Type="Boolean" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="mantenimientoHoras" Type="Int32" />
+          <Property Name="Dias_Vencimiento_Maquina" Type="Int32" />
+          <Property Name="Verificar_fechaPermiso_Maquina" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Proceso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Ranura" Type="Boolean" />
+          <Property Name="Habilitado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tipo_Movimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="EsLlave" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tipo_proceso">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Name="id_tipo" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="grupo" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="70" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Llaves_Usuarios1">
+          <End Role="Colaboradores" Type="CAEMPRUEBASModel.Colaboradores" Multiplicity="0..1" />
+          <End Role="Llaves" Type="CAEMPRUEBASModel.Llaves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colaboradores">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Llaves">
+              <PropertyRef Name="Colaborador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CAEMPRUEBASModelStoreContainer" CdmEntityContainer="CAEMPRUEBASEntities">
+          <EntitySetMapping Name="Colaboradores">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Colaboradores">
+              <MappingFragment StoreEntitySet="Colaboradores">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nomina" ColumnName="Nomina" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="minuto" ColumnName="minuto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Llaves">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Llaves">
+              <MappingFragment StoreEntitySet="Llaves">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Colaborador" ColumnName="Colaborador" />
+                <ScalarProperty Name="Faltas" ColumnName="Faltas" />
+                <ScalarProperty Name="Limite_Faltas" ColumnName="Limite_Faltas" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fecha_Inicial" ColumnName="Fecha_Inicial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maquinas">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Maquinas">
+              <MappingFragment StoreEntitySet="Maquinas">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Dias_Vencimiento" ColumnName="Dias_Vencimiento" />
+                <ScalarProperty Name="Tiempo_Minimo_Trabajo" ColumnName="Tiempo_Minimo_Trabajo" />
+                <ScalarProperty Name="Tiempo_Inactividad" ColumnName="Tiempo_Inactividad" />
+                <ScalarProperty Name="Verificar_Maquina" ColumnName="Verificar_Maquina" />
+                <ScalarProperty Name="Baja" ColumnName="Baja" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="mantenimientoHoras" ColumnName="mantenimientoHoras" />
+                <ScalarProperty Name="Dias_Vencimiento_Maquina" ColumnName="Dias_Vencimiento_Maquina" />
+                <ScalarProperty Name="Verificar_fechaPermiso_Maquina" ColumnName="Verificar_fechaPermiso_Maquina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proceso">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Proceso">
+              <MappingFragment StoreEntitySet="Proceso">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Ranura" ColumnName="Ranura" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Movimiento">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Tipo_Movimiento">
+              <MappingFragment StoreEntitySet="Tipo_Movimiento">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="EsLlave" ColumnName="EsLlave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_proceso">
+            <EntityTypeMapping TypeName="CAEMPRUEBASModel.Tipo_proceso">
+              <MappingFragment StoreEntitySet="Tipo_proceso">
+                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
