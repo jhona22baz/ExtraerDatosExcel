@@ -97,7 +97,8 @@ namespace ExtraerDatosExcel
         {
             Dictionary<string, string> colaboradores = new Dictionary<string, string>()
             {
-                {"0","SUPERVISOR"},{"1","MANTENIMIENTO"},{"2","Sin Llave"},{"1862", "123456789"},{"1863", "000001"},{"1864", "000002"},{"1865", "000003"},{"1866", "000005"},{"1867", "000004"},{"1868", "000006"}
+                {"0","SUPERVISOR"},{"1","MANTENIMIENTO"},{"2","Sin Llave"},{"1862", "123456789"},{"1863", "000001"},{"1864", "000002"},{"1865", "000003"},{"1866", "000005"},
+                {"1867", "000004"},{"1868", "000006"}
             };
 
              Dictionary<string, string> maquinas = new Dictionary<string, string>()
